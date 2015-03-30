@@ -1,0 +1,9 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=localhost;dbname=vizitky'
+	user: root
+	password:
+	options:
+		lazy: yes

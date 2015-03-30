@@ -1,0 +1,29 @@
+{block content}
+<div class="container">
+    
+    
+    <table class="table table-bordered table-striped">
+	<thead>
+	    <tr>
+		<th>Name</th>
+		<th>Surname</th>
+		<th>Workplace</th>
+		<th>Institution</th>
+		<th>Note</th>
+		<th></th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr n:foreach="$cards as $card">
+		
+		<td>{$card->name}</td>
+		<td><a n:href=":Front:Card:view $card->surname">{$card->surname}</a></td>
+		<td>{$card->workplace}</td>
+		<td>{$card->project}</td>
+		<td>{$card->note|truncate:75}</td>
+		<td></td>
+	    </tr>
+	</tbody>
+    </table>
+    
+</div>
