@@ -8,6 +8,10 @@ class CardModel {
     
     protected $database;
     private $TableName = 'card';
+    private $UploadThumbPath = '/images/cards/thumbs/';
+    private $UploadPath = '/images/cards/';
+    
+    
     public function __construct(\Nette\Database\Context $database) {
 	$this->database = $database;
     }
@@ -49,11 +53,11 @@ class CardModel {
 		    $extension = pathinfo($card->getSanitizedName(), PATHINFO_EXTENSION);
 		    $cardName = $values->surname;
 		    
-		    /* presun obrazku */    
+		    /** @TODO vyresit kolize , presun obrazku */    
 		    $image = $card->toImage();
 		    $image->resize(700,400, Image::STRETCH|Image::SHRINK_ONLY);
-		    $image->save(WWW_DIR.'/images/cards/thumbs/'.$cardName.'.'.$extension);
-		    $image->save(WWW_DIR . '/images/cards/'.$cardName.'.'.$extension);   
+		    $image->save(WWW_DIR . $this->UploadThumbPath . $cardName.'.'. $extension);
+		    $image->save(WWW_DIR . $this->UploadPath . $cardName . '.' . $extension);   
 		}
 	    }
 	} catch (Exception $ex) {
@@ -85,20 +89,24 @@ class CardModel {
     
     public function update($values){	
 	
-	$this->database->table($this->TableName)->get($values);
 	
-	$this->database->table($this->TableName)->update($values)->where('surname',$surname);
+	
+	
 	
     }
     
     public function delete($id){
 	
 	$row = $this->getId($id);
-	if($row){
-	    
-	    
-	}
 	$this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);
+	/*if($row){
+	    unlink(WWW_DIR.$this->UploadPath . $row->path);
+	    unlink(WWW_DIR.$this->UploadThumbPath . $row->thumb_path);
+	    $this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);
+	    
+	}*/
+	
+	
 	
     }
     

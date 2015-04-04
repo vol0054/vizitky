@@ -3,15 +3,14 @@
 {block content}
 
 <div class="container">
-    <div class="row">
+    
 	<div class="page-header">
 	    <div class="row">
-		<div class="col-md-8">	    
+		<div class="col-md-9">	    
 		    <a n:href="Homepage:"> <button class="btn btn-default"> <span class="glyphicon glyphicon-arrow-left"></span> Zpet </button> </a>
 		</div>
-		<div class="col-md-2">
-		    <div class="btn-group" role="group" aria-label="...">
-			<a n:href="edit, $card->id"> 
+		<div class="col-md-3">		    
+		    <a n:href="edit, $card->id"> 
 			    <button type="button" class="btn btn-primary"> 
 				<span class="glyphicon glyphicon-pencil"></span> upravit
 			    </button>
@@ -20,15 +19,33 @@
 			<button type="button" class="btn btn-danger"> 
 			    <span class="glyphicon glyphicon-remove"></span> Odebrat
 			</button>
-			</a>
-		    </div>
+			</a>	    
 		</div>
 	    </div>
 	</div>
-	<div class="col-lg-12">
-	    <img src="{$basePath}/{$card->path}"> 
-	    {$card->name}
-	    {$card->surname}
+	<div class="col-md-8">
+	    <img src="{$basePath}/{$card->path}" id="card" class="img-thumbnail">
+	    
 	</div>
-    </div>
+	<div class="col-md-4">
+	    {ifset $card->foto}
+		<img src="{$basePath}/{$card->foto}" class="img-thumbnail">
+		{else}
+		    <img src="http://placehold.it/200x200">
+		    <h4>Pracoviště: </h4>{$card->workplace}
+		    <h4>Projekt: </h4> {$card->project}
+		    <h4>Datum setkání:</h4> {$card->date}
+		    <h4>www: </h4> {$card->www}
+		    
+		    
+	    {/ifset}
+	    
+	</div>
+	<div class="row">
+	    <div class="col-md-12">
+		<h4>Poznámka:</h4>
+		{$card->note}
+		
+	    </div>
+	</div>
 </div>

@@ -25,9 +25,11 @@ class BasePresenter extends \App\Presenters\BasePresenter{
 	return new components\navigation\NavigationControl;
     } 
    
-    public function createComponentSidebar(){
-	return new components\sidebar\SidebarControl();
+    public function createComponentFooter(){
+	return new components\footer\FooterControl;
     }
+    
+    
 
     
 }

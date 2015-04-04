@@ -11,7 +11,7 @@ class SearchFormFactory {
 	$f->getElementPrototype()->class('ajax');
 	$f->addText('keywords')
 		->setRequired()
-		->setAttribute('placeholder', 'Jmeno');
+		->setAttribute('placeholder', 'Příjmení');
 	$f->addSubmit('submit','Vyhledat')
 		->setAttribute('class', 'btn btn-primary');
 	

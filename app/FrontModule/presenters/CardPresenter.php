@@ -5,12 +5,10 @@ use App\components\forms\NewCardFormFactory;
 use Tracy\Debugger;
 class CardPresenter extends BasePresenter{
     
-    /** @persistent */
-    public $backlink = '';
+    
     
     public function renderView($id)
     {
-	
 	$card= $this->Card->getId($id);
 	$this->template->card = $card;
     }
@@ -32,7 +30,7 @@ class CardPresenter extends BasePresenter{
     {
 	$values = $form->getValues();
 	$cardId = $this->getParameter('id');
-	
+	Debugger::dump($cardId);
 	if($cardId){
 	    
 	    $card = $this->database->table('card')->get($cardId);
@@ -60,8 +58,10 @@ class CardPresenter extends BasePresenter{
 	if(!$data){
 	    $this->error('neexistujici vizitka');
 	}
-	$this['cardForm']->setDefaults($data->toArray());	
+	$this['cardForm']->setDefaults($data->toArray());
 	
+	/** backlink = id vizitky , pro presmerovani na stejnou vizitku pri editaci */
+	$this->template->backlink = $data;
     }
     
     public function actionDelete($id){

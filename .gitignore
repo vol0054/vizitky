@@ -1,3 +1,5 @@
 /app/config/
 /temp/
 /log/
+/bower_components/
+/bin/
