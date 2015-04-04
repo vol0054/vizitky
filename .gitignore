@@ -1,5 +1,5 @@
-/app/config/
 /temp/
-/log/
 /bower_components/
 /bin/
+/app/config/config.neon
+/app/config/config.local.neon
