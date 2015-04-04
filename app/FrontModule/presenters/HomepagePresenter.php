@@ -23,32 +23,23 @@ class HomepagePresenter extends BasePresenter{
 	$cards = $list->limit($paginator->itemsPerPage, $paginator->offset);
 	$this->template->cards = $cards;
 	
-	
-	
     }    
-    
-    public function renderView($surname){
-	
-	$card= $this->Card->getSurname($surname);
-	$this->template->card = $card;
-	
-    }
-    
-    public function createComponentVp(){
+        
+    public function createComponentVp()
+    {
 	return new \NasExt\Controls\VisualPaginator();
     }
    
     public function handleSearch()
     {
-	
 	$this->template->cards = $this->Card->getAll();
 	$this->redrawControl('results');
     }
    
-    public function createComponentSearchForm(){
+    public function createComponentSearchForm()
+    {
 	$form = (new SearchFormFactory())->create();
-	
-	//$form->onSuccess[] = $this->SearchFormOk;
+	$form->onSuccess[] = $this->SearchFormOk;
 	return $form;
     }
     

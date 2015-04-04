@@ -1,6 +1,7 @@
 <?php
 
 namespace App\FrontModule\Presenters;
+
 use Nette,
 	App\Model;
 use Nette\Application\UI\Form;
@@ -12,13 +13,21 @@ class BasePresenter extends \App\Presenters\BasePresenter{
     /** @inject @var \App\Model\CardModel */
     public $Card;
    
-   public function createComponentNavigation(){
-       return new components\navigation\NavigationControl;
-   } 
+    /** @var \Nette\Database */
+    protected $database;
+    
+    public function __construct(Nette\Database\Context $database) {
+	parent::__construct();
+	$this->database = $database;
+    }
    
-   public function createComponentSidebar(){
-       return new components\sidebar\SidebarControl();
-   }
+    public function createComponentNavigation(){
+	return new components\navigation\NavigationControl;
+    } 
    
+    public function createComponentSidebar(){
+	return new components\sidebar\SidebarControl();
+    }
+
     
 }

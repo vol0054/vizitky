@@ -7,16 +7,16 @@
 	<div class="page-header">
 	    <div class="row">
 		<div class="col-md-8">	    
-		    <a n:href="Homepage"> <button class="btn btn-default"> <span class="glyphicon glyphicon-arrow-left"></span> Zpet </button> </a>
+		    <a n:href="Homepage:"> <button class="btn btn-default"> <span class="glyphicon glyphicon-arrow-left"></span> Zpet </button> </a>
 		</div>
 		<div class="col-md-2">
 		    <div class="btn-group" role="group" aria-label="...">
-			<a n:href="edit, $card->surname"> 
+			<a n:href="edit, $card->id"> 
 			    <button type="button" class="btn btn-primary"> 
 				<span class="glyphicon glyphicon-pencil"></span> upravit
 			    </button>
 			</a>
-			<a n:href="delete, $card->surname"> 
+			<a n:href="delete, $card->id"> 
 			<button type="button" class="btn btn-danger"> 
 			    <span class="glyphicon glyphicon-remove"></span> Odebrat
 			</button>

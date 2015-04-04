@@ -10,7 +10,7 @@
 		{snippet vyhledavani}
 		    {control searchForm}	    
 		{/snippet}
-		<input><a n:href="Search!">delej ty kurwo</a>
+		<input><a n:href="Search!">delej</a>
 	    </div>
 	    <div class="col-md-2">
 		<a n:href="Card:new"> 
@@ -39,7 +39,7 @@
     {snippet cards}
 	{ifset $cards}
 	    <div n:foreach="$cards as $card" class="col-md-4 portfolio-item" >
-		<a n:href=":Front:Card:view $card->surname">
+		<a n:href=":Front:Card:view $card->id">
 		    <img class="img-responsive" src="{$basePath}/{$card->path}" alt="">        
 		    <h3>{$card->name} {$card->surname}</h3>
 		</a>

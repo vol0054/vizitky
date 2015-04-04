@@ -2,13 +2,17 @@
 
 namespace App\FrontModule\Presenters;
 use App\components\forms\NewCardFormFactory;
+use Tracy\Debugger;
 class CardPresenter extends BasePresenter{
     
-    public function renderView($surname){
+    /** @persistent */
+    public $backlink = '';
+    
+    public function renderView($id)
+    {
 	
-	$card= $this->Card->getSurname($surname);
+	$card= $this->Card->getId($id);
 	$this->template->card = $card;
-	
     }
     
     public function renderNew()
@@ -16,31 +20,58 @@ class CardPresenter extends BasePresenter{
 	
     }    
     
-    public function createComponentNewCard()
+    public function createComponentCardForm()
     {
 	$form = (new NewCardFormFactory())->create();
 	
-	$form->onSuccess[] = $this->NewCardSuccess;
+	$form->onSuccess[] = $this->cardFormSucceeded;
 	return $form;
     }   
     
-    public function NewCardSuccess($form)
+    public function cardFormSucceeded($form)
     {
-	$values = $form->values;
+	$values = $form->getValues();
+	$cardId = $this->getParameter('id');
 	
-	$this->Card->insert($values);
+	if($cardId){
+	    
+	    $card = $this->database->table('card')->get($cardId);
+	    
+	    $card->update($values);
+	    $this->flashMessage('vizitka byla úspěšně upravena','alert alert-success');
+	    
+	}else{
+	    
+	    $card = $this->Card->insert($values);
+	    
+	    $this->flashMessage('vizitka osoby '.$card->surname.' '.$card->name.' byla úspěšně přidána','alert alert-success');
+	    
+	    $this->redirect('Card:view',$card->id);
+	}
 	
-	$this->flashMessage('Aktualita byla úspěšně publikována.', 'alert alert-success');
-        $this->redirect('this');
+	
 	
     }
     
-    public function actionEdit($surname){
-	$card = $this->Card->getSurname($surname);
-	if(!$card){
+    public function actionEdit($id){
+	
+	$data = $this->Card->getId($id);
+	
+	if(!$data){
 	    $this->error('neexistujici vizitka');
 	}
-	$this['newCard']->setDefaults($card->toArray());
+	$this['cardForm']->setDefaults($data->toArray());	
+	
+    }
+    
+    public function actionDelete($id){
+	
+	/** @TODO vyskakovaci okno "opravdu si prejete smazat vizitku s .... */
+	
+	$delete = $this->Card->delete($id);
+	
+	$this->flashMessage('Vizitka byla úspěšně smazána!', 'alert alert-success');
+        $this->redirect('Homepage:');
 	
     }
 }
