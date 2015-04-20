@@ -5,18 +5,12 @@
     <div class="page-header">
 	<div class="row">
 		<div class="col-md-10">	    
-		    <a n:href="Card:view, $backlink->id"> <button class="btn btn-default"> <span class="glyphicon glyphicon-arrow-left"></span> Zpet </button> </a>
+		    <a n:href="Card:view, $card->id"> <button class="btn btn-default"> <span class="glyphicon glyphicon-arrow-left"></span> Zpet </button> </a>
 		</div>
-		<div class="col-md-2">
-		    <a n:href=""> 
-		    <button class="btn btn-info"> 
-			<span class="glyphicon glyphicon-pencil"></span> upravit
-		    </button>
-		</a>
-		</div>
+		
 	    </div>
     </div>
-    
+    <img src="{$basePath}/{$card->img}" n:if="$card">
     {control cardForm}
     
 </div>

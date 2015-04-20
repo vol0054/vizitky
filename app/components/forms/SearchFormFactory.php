@@ -9,7 +9,7 @@ class SearchFormFactory {
 	
 	$f = new Form();
 	$f->getElementPrototype()->class('ajax');
-	$f->addText('keywords')
+	$f->addText('search')
 		->setRequired()
 		->setAttribute('placeholder', 'Příjmení');
 	$f->addSubmit('submit','Vyhledat')

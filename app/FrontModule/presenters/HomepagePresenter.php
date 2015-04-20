@@ -11,8 +11,6 @@ class HomepagePresenter extends BasePresenter{
     
     public function renderDefault($cards){
 	
-	
-	
 	$list = $this->Card->getAll();
 	$listCount = $list->count();
 	/** @var NasExt\Controls\VisualPaginator $vp */
@@ -32,7 +30,7 @@ class HomepagePresenter extends BasePresenter{
    
     public function handleSearch()
     {
-	$this->template->cards = $this->Card->getAll();
+	$this->template->results = $this->Card->getAll();
 	$this->redrawControl('results');
     }
    
@@ -46,21 +44,8 @@ class HomepagePresenter extends BasePresenter{
     public function SearchFormOk($form){
 	
 	$values = $form->getValues();	
-	$cards = $this->Card->search($values->keywords);
-	$this->redirect('this',$values->keywords);
-	    
-	
-	
-	//$this->template->cards = $this->Card->search($form->values->keywords);
-	
-	/*if ($this->isAjax())
-	{
-	    $this->template->cards = $this->Card->search($form->values->keywords);
-	    $this->redrawControl('cards');
-	}else{
-	    $this->flashMessage('vizitka s jmenem '.$form->values->keywords.' nebyla nalezena','alert alert-danger');
-	    $this->redrawControl('vyhledavani');
-	}*/
+	$results = $this->Card->search($values->search);
+	$this->template->cards = $results;	
 	
 	/*$values = $form->values;
 	$this->template->cards = $this->Card->search($values->keywords);
@@ -73,6 +58,10 @@ class HomepagePresenter extends BasePresenter{
 	    $this->flashMessage('vizitka s jmenem '.$values->keywords.' nebyla nalezena','alert alert-danger');
 	    $this->redrawControl('vyhledavani');
 	 }*/
+    }
+    
+    public function renderSearch(){
+	
     }
 
 }

@@ -1,11 +1,9 @@
 <?php
 
 namespace App\FrontModule\Presenters;
-use App\components\forms\NewCardFormFactory;
+use App\components\forms\CardFormFactory;
 use Tracy\Debugger;
-class CardPresenter extends BasePresenter{
-    
-    
+class CardPresenter extends BasePresenter{   
     
     public function renderView($id)
     {
@@ -20,7 +18,7 @@ class CardPresenter extends BasePresenter{
     
     public function createComponentCardForm()
     {
-	$form = (new NewCardFormFactory())->create();
+	$form = (new CardFormFactory())->create();
 	
 	$form->onSuccess[] = $this->cardFormSucceeded;
 	return $form;
@@ -30,22 +28,36 @@ class CardPresenter extends BasePresenter{
     {
 	$values = $form->getValues();
 	$cardId = $this->getParameter('id');
-	Debugger::dump($cardId);
-	if($cardId){
-	    
+	
+	/** pokud uz vizitka existuje - pouze se upravi zaznamy */
+	if($cardId){	    
 	    $card = $this->database->table('card')->get($cardId);
-	    
+	    /*
+	    //pokud nahravam fotku
+	    if ( $values[ 'path' ]->isOk() ) {
+		//funkce pro zmenseni a ulozeni fotky, vrati nazev fotky
+		$aValues['path'] = $this->createNewsPhoto( $aValues["picture"] );
+	    }
+	    else
+	    {
+		//nenahravam fotku
+		unset( $aValues[ "picture" ] );
+	    }*/
+	    if(!$values->img){
+		unset( $values->img );
+	    }	    
 	    $card->update($values);
 	    $this->flashMessage('vizitka byla úspěšně upravena','alert alert-success');
-	    
+	
+	/** pokud vizitka neni v systemu pak se vytvori novy zaznam */    
 	}else{
 	    
-	    $card = $this->Card->insert($values);
-	    
-	    $this->flashMessage('vizitka osoby '.$card->surname.' '.$card->name.' byla úspěšně přidána','alert alert-success');
-	    
+	    $card = $this->Card->insert($values);    
+	    $this->flashMessage('vizitka osoby '.$card->surname.' '.$card->name.' byla úspěšně přidána','alert alert-success');	    
 	    $this->redirect('Card:view',$card->id);
 	}
+	
+	/** @TODO vyresit codelat kdyz se zmeni obrazek s vizitkou */
 	
 	
 	
@@ -61,7 +73,7 @@ class CardPresenter extends BasePresenter{
 	$this['cardForm']->setDefaults($data->toArray());
 	
 	/** backlink = id vizitky , pro presmerovani na stejnou vizitku pri editaci */
-	$this->template->backlink = $data;
+	$this->template->card = $data;
     }
     
     public function actionDelete($id){

@@ -9,7 +9,7 @@
 	    <div class="col-md-10">
 		{snippet vyhledavani}
 		    {form searchForm}
-			{input keywords}
+			{input search}
 			{input submit}
 		    {/form}
 		{/snippet}
@@ -19,14 +19,12 @@
 		    <button class="btn btn-success"> 
 			<span class="glyphicon glyphicon-plus-sign"></span> Pridat vizitky
 		    </button>
-		</a>
-		
-		
-		
+		</a>		
 	    </div>
 	</div>
     
     </div>
+	    
     {snippet results}
         {ifset $results}
             <div id="naseptavac" n:foreach="$results as $result">
@@ -42,7 +40,7 @@
 	{ifset $cards}
 	    <div n:foreach="$cards as $card" class="col-md-4 portfolio-item" >
 		<a n:href=":Front:Card:view $card->id">
-		    <img class="img-responsive img-thumbnail" src="{$basePath}/{$card->path}" alt="">        
+		    <img class="img-responsive img-thumbnail" src="{$basePath}/{$card->img}" alt="">        
 		    <h3>{$card->name} {$card->surname}</h3>
 		</a>
 		<h4>Project: {$card->project}</h4>
