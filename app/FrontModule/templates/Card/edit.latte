@@ -10,7 +10,8 @@
 		
 	    </div>
     </div>
-    <img src="{$basePath}/{$card->img}" n:if="$card">
+    <img src="{$basePath}/{$card->thumb_img}" n:if="$card" class="img-responsive img-thumbnail center-block">
+    <div style="margin-bottom: 25px;"></div>
     {control cardForm}
     
 </div>

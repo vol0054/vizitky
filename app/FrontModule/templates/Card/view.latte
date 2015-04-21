@@ -15,7 +15,7 @@
 				<span class="glyphicon glyphicon-pencil"></span> upravit
 			    </button>
 			</a>
-			<a n:href="delete, $card->id"> 
+			<a data-toggle="modal" data-target="#myModal"> 
 			<button type="button" class="btn btn-danger"> 
 			    <span class="glyphicon glyphicon-remove"></span> Odebrat
 			</button>
@@ -46,4 +46,24 @@
 		
 	    </div>
 	</div>
+</div>
+		
+		
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Pozor!!!</h4>
+      </div>
+      <div class="modal-body">
+        Opravu si přejete odstranit vizitku osoby {$card->name} {$card->surname} ???
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">ne</button>
+        <a n:href="delete, $card->id"><button type="button" class="btn btn-success">Ano</button></a>
+      </div>
+    </div>
+  </div>
 </div>

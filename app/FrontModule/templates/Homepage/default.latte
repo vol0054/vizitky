@@ -40,7 +40,7 @@
 	{ifset $cards}
 	    <div n:foreach="$cards as $card" class="col-md-4 portfolio-item" >
 		<a n:href=":Front:Card:view $card->id">
-		    <img class="img-responsive img-thumbnail" src="{$basePath}/{$card->img}" alt="">        
+		    <img class="img-responsive img-thumbnail" src="{$basePath}/{$card->thumb_img}" alt="">        
 		    <h3>{$card->name} {$card->surname}</h3>
 		</a>
 		<h4>Project: {$card->project}</h4>
@@ -50,15 +50,6 @@
     {/snippet}
     
     <br>
-    {*<div n:for="$i = 0; $i < 10; $i++" class="col-md-4 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="#">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>*}
             
 </div>
     {control vp}

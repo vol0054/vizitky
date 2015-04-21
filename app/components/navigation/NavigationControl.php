@@ -8,8 +8,7 @@ class NavigationControl extends components\BaseControl{
     public function render(){
 	
 	$this->template->menuItems = [
-	    'Vizitky' => 'Homepage:default',
-	    
+	    'Vizitky' => 'Homepage:default',	    
 	];
 	$this->template->setFile(__DIR__.'/navigation.latte');
 	$this->template->render();
