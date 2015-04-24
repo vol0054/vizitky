@@ -9,7 +9,7 @@
 	    <div class="col-md-10">
 		{snippet vyhledavani}
 		    {form searchForm}
-			{input search}
+			{input text}
 			{input submit}
 		    {/form}
 		{/snippet}
@@ -21,31 +21,32 @@
 		    </button>
 		</a>		
 	    </div>
-	</div>
-    
+	</div>    
     </div>
 	    
+    {*<div class="left">
     {snippet results}
-        {ifset $results}
-            <div id="naseptavac" n:foreach="$results as $result">
-                <table class="wp-nap">
-
-                    
-		    {$cards->surname}
-                </table>
-            </div>
-        {/ifset}
+    {ifset $results}
+            {foreach $results as $result}
+                // telo pro zobrazeni nabidek
+            {/foreach}
+    {/ifset}
+    <p>Aktuálně je naše nabídka prázdná!</p>
     {/snippet}
+    </div>*}
+    
+    {control vp}
+    
     {snippet cards}
 	{ifset $cards}
 	    <div n:foreach="$cards as $card" class="col-md-4 portfolio-item" >
-		<a n:href=":Front:Card:view $card->id">
-		    <img class="img-responsive img-thumbnail" src="{$basePath}/{$card->thumb_img}" alt="">        
-		    <h3>{$card->name} {$card->surname}</h3>
-		</a>
-		<h4>Project: {$card->project}</h4>
-		    <p>{$card->note|truncate:200}</p>
-	    </div>
+	<a n:href=":Front:Card:view $card->id">
+	    <img class="img-responsive img-thumbnail" src="{$basePath}/{$card->thumb_img}" alt="">        
+	    <h3>{$card->name} {$card->surname}</h3>
+	</a>
+	<h4>Project: {$card->project}</h4>
+	    <p>{$card->note|truncate:200}</p>
+    </div>
 	{/ifset}
     {/snippet}
     
@@ -53,3 +54,5 @@
             
 </div>
     {control vp}
+
+   

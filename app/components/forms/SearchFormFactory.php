@@ -8,10 +8,9 @@ class SearchFormFactory {
     public function create(){
 	
 	$f = new Form();
-	$f->getElementPrototype()->class('ajax');
-	$f->addText('search')
-		->setRequired()
-		->setAttribute('placeholder', 'Příjmení');
+	$f->addText('text')
+		->setRequired('TRUE')
+		->setAttribute('placeholder', 'Vyhledat');
 	$f->addSubmit('submit','Vyhledat')
 		->setAttribute('class', 'btn btn-primary');
 	

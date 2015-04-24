@@ -1,0 +1,24 @@
+{block content}
+
+<div class="container">
+<div class="row">
+    <div class="page-header">
+
+    </div>
+{ifset $cards}
+	    <div n:foreach="$cards as $card" class="col-md-4 portfolio-item" >
+	<a n:href=":Front:Card:view $card->id">
+	    <img class="img-responsive img-thumbnail" src="{$basePath}/{$card->thumb_img}" alt="">        
+	    <h3>{$card->name} {$card->surname}</h3>
+	</a>
+	<h4>Project: {$card->project}</h4>
+	    <p>{$card->note|truncate:200}</p>
+    </div>
+{/ifset}
+
+</div>
+</div>
+    
+    
+    
+

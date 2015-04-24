@@ -29,7 +29,8 @@ class CardModel {
     
     /** @return blah bla */
     public function search($keywords){
-	return $this->database->table($this->TableName)->where('surname LIKE ?', '%'.$keywords.'%')->fetch();
+	//return $this->database->table($this->TableName)->where('surname LIKE ?', '%'.$keywords.'%');
+	return $this->database->query("SELECT * FROM ".$this->TableName." WHERE surname LIKE '%".$keywords."%'");
     } 
     
     /** zpracuje */
@@ -129,7 +130,7 @@ class CardModel {
 		    $extension = pathinfo($card->getSanitizedName(), PATHINFO_EXTENSION);
 		    
 		    if(!$values->surname){
-			$cardName = pathinfo($image->getSanitizedName(), PATHINFO_FILENAME);
+			$cardName = pathinfo($card->getSanitizedName(), PATHINFO_FILENAME);
 		    }else{
 			$cardName = $values->surname; 
 		    }
