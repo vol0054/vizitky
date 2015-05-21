@@ -16,7 +16,7 @@ class HomepagePresenter extends BasePresenter{
 	/** @var NasExt\Controls\VisualPaginator $vp */
 	$vp = $this['vp'];
 	$paginator = $vp->getPaginator();
-	$paginator->itemsPerPage = 10;
+	$paginator->itemsPerPage = 9;
 	$paginator->itemCount = $listCount;
 	$cards = $list->limit($paginator->itemsPerPage, $paginator->offset);
 	$this->template->cards = $cards;
@@ -38,8 +38,7 @@ class HomepagePresenter extends BasePresenter{
     public function SearchFormOk($form){
 	
 	$values = $form->getValues();
-	$this->redirect('Homepage:search', array('keywords' => $values->text));
-	
+	$this->redirect('Homepage:search', array('keywords' => $values->text));	
     }
     
     public function renderSearch($keywords){	
@@ -53,6 +52,5 @@ class HomepagePresenter extends BasePresenter{
 	$results = $this->Card->search($keywords);
 	$this->cards = $results;
 	$this->redirect('Homepage:default', array('keywords' => $keywords));
-	
     }
 }

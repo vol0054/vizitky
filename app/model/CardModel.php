@@ -18,7 +18,6 @@ class CardModel {
 	$this->database = $database;
     }
     
-    ///** @method var getAll() Get all rows from table card */
     public function getAll(){
 	return $this->database->table($this->TableName);
     }
@@ -29,8 +28,7 @@ class CardModel {
     
     /** @return blah bla */
     public function search($keywords){
-	//return $this->database->table($this->TableName)->where('surname LIKE ?', '%'.$keywords.'%');
-	return $this->database->query("SELECT * FROM ".$this->TableName." WHERE surname LIKE '%".$keywords."%'");
+	return $this->database->query("SELECT * FROM ".$this->TableName." WHERE surname LIKE '%".$keywords."%' OR institution LIKE '%".$keywords."%'");
     } 
     
     /** zpracuje */
@@ -135,13 +133,13 @@ class CardModel {
 			$cardName = $values->surname; 
 		    }
 		    
-		    /** @TODO vyresit kolize nazvu, presun obrazku */    
+		        
 		    $image = $card->toImage();
-		    $image->resize(700,400, Image::SHRINK_ONLY);
+		    //$image->resize(700,400, Image::SHRINK_ONLY);
 		    $image->save(WWW_DIR . $this->UploadPath . $cardName . '.' . $extension);  
 		    
 		    $thumb = $card->toImage();
-		    $thumb->resize(400,NULL, iMAGE::SHRINK_ONLY);
+		    $thumb->resize(700,400, Image::STRETCH);
 		    $thumb->save(WWW_DIR .$this->UploadThumbPath . $cardName.'.'.$extension);
 			    
 		}
@@ -156,7 +154,7 @@ class CardModel {
 	    $query = $this->database->table($this->TableName)->insert([
 		    'name'=> $values->name,
 		    'surname'=> $cardName,
-		    'workplace'=> $values->workplace,
+		    'institution'=> $values->institution,
 		    'project'=>$values->project,
 		    'www'=>$values->www,
 		    'date'=>$date,
@@ -174,13 +172,10 @@ class CardModel {
     }
     
     public function update($values){	
-	
 	$this->database->table($this->TableName)->update($values);
-	
     }
     
-    public function delete($id){
-	
+    public function delete($id){	
 	$row = $this->getId($id);
 	//$this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);
 	if($row){
@@ -188,11 +183,5 @@ class CardModel {
 	    unlink(WWW_DIR.$row->thumb_img);
 	    $this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);	    
 	}
-	/** @TODO if $image unlink $image */
-	
-	
-    }
-    
-    
-    
+    }    
 }

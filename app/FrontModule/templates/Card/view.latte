@@ -8,6 +8,7 @@
 	    <div class="row">
 		<div class="col-md-9">	    
 		    <a n:href="Homepage:"> <button class="btn btn-default"> <span class="glyphicon glyphicon-arrow-left"></span> Zpet </button> </a>
+		    
 		</div>
 		<div class="col-md-3">		    
 		    <a n:href="edit, $card->id"> 
@@ -24,14 +25,22 @@
 	    </div>
 	</div>
 	<div class="col-md-8">
-	    <img src="{$basePath}/{$card->img}" id="card" class="img-thumbnail">
 	    
+	    <img src="{$basePath}/{$card->img}" id="card" class="img-thumbnail">
+	    <h3>{$card->name} {$card->surname}</h3>
 	</div>
 	<div class="col-md-4">
 	    {ifset $card->foto}
-		<img src="{$basePath}/{$card->foto}" class="img-thumbnail">
+		<img id="photo" src="{$basePath}/{$card->foto}" class="img-thumbnail">
 		{else}
-		    <img src="http://placehold.it/200x200">	    
+		    <div class="photo">
+			<div class="hover">
+			    <a href="">
+				<button type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span> </button>
+			    </a></div>
+			
+			    <img src="http://placehold.it/200x200">	 
+			</div>
 	    {/ifset}
 	    <h4>Pracoviště:</h4> {$card->institution}
 	    <h4>Projekt: </h4> {$card->project}
@@ -48,6 +57,8 @@
 	</div>
 </div>
 		
+
+		
 		
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -55,10 +66,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Pozor!!!</h4>
+        <h2 class="modal-title center-block" id="myModalLabel">Pozor!!!</h2>
       </div>
       <div class="modal-body">
-        Opravu si přejete odstranit vizitku osoby {$card->name} {$card->surname} ???
+	  Opravu si přejete odstranit vizitku osoby <strong>{$card->name} {$card->surname}</strong> ???
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">ne</button>

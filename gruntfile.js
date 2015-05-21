@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 	    }
 	},
 	concat: {
-	    /** veme jquery.js a hovna.js a spoji je dohromady */
+	    /** vezme dva soubory a spoji je dohromady */
 	    dist: {
 		src: ['www/js/jquery.js','www/js/testHoven.js'],
 		dest: 'www/js/test/build.js',

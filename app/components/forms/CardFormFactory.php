@@ -13,14 +13,16 @@ class CardFormFactory {
 	$f = new Form;
 	
 	$f->addText('name','Jmeno:');//->setRequired();
-	$f->addText('surname','Prijmeni:');//->setRequired();
-	$f->addText('workplace','Pracoviste:');
+	$f->addText('surname','Prijmeni:')->setRequired();
+	$f->addText('institution','Pracoviste:');
 	$f->addText('project','Projekt:');	
 	$f->AddText('www','web:');
 	//$f->addUpload('photo','Foto:');
-	$f->addText('date','Datum setkani:');
-	$f->addTextArea('note','Poznamka');
-	$f->addMultiUpload('img','Obrazek');
+	$f->addText('date','Datum setkani:')
+		->setAttribute('type','date');
+	$f->addTextArea('note','Poznamka')
+		->setAttribute('rows','10');
+	$f->addMultiUpload('img','Vizitka');
 	$f->addSubmit('submit','Uložit');
 	
 	// setup form rendering
@@ -44,8 +46,7 @@ class CardFormFactory {
 	    } elseif ($control instanceof Controls\Checkbox || $control instanceof Controls\CheckboxList || $control instanceof Controls\RadioList) {
 		    $control->getSeparatorPrototype()->setName('div')->addClass($control->getControlPrototype()->type);
 	    }
-	}
-	
+	}	
 	return $f;
     }
 }
