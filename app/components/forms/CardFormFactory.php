@@ -17,12 +17,12 @@ class CardFormFactory {
 	$f->addText('institution','Pracoviste:');
 	$f->addText('project','Projekt:');	
 	$f->AddText('www','web:');
-	//$f->addUpload('photo','Foto:');
 	$f->addText('date','Datum setkani:')
 		->setAttribute('type','date');
 	$f->addTextArea('note','Poznamka')
 		->setAttribute('rows','10');
 	$f->addMultiUpload('img','Vizitka');
+	$f->addUpload('foto','Foto:');
 	$f->addSubmit('submit','Uložit');
 	
 	// setup form rendering
