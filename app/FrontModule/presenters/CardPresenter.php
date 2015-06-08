@@ -28,7 +28,7 @@ class CardPresenter extends BasePresenter{
 	/** overeni datumu */
 	$values = $form->values;	
 	if($values->date > date("RRR-mm-dd")){
-	    $form->addError('zadane datum nesmi byt pozdejsi nez dnesni!');
+	    $form->addError('zadané datum nesmí být pozdější než dnešní!');
 	}
     }
     
@@ -40,21 +40,15 @@ class CardPresenter extends BasePresenter{
 	/** pokud uz vizitka existuje - pouze se upravi zaznamy */
 	if($cardId){
 	    $card = $this->database->table('card')->get($cardId);
-	    /*
-	    //pokud nahravam fotku
-	    if ( $values[ 'path' ]->isOk() ) {
-		//funkce pro zmenseni a ulozeni fotky, vrati nazev fotky
-		$aValues['path'] = $this->createNewsPhoto( $aValues["picture"] );
-	    }
-	    else
-	    {
-		//nenahravam fotku
-		unset( $aValues[ "picture" ] );
-	    }*/
 	    if(!$values->img){
 		unset( $values->img);
-	    }	    
+	    }
+	    if(!$values->foto){
+		unset($values->foto);
+	    }
 	    $card->update($values);
+	    
+	    //$this->Card->insert($values);
 	    $this->flashMessage('vizitka byla úspěšně upravena','alert alert-success');
 	    $this->redirect('Card:view',$card->id);
 
@@ -72,7 +66,7 @@ class CardPresenter extends BasePresenter{
 	$data = $this->Card->getId($id);
 	
 	if(!$data){
-	    $this->error('neexistujici vizitka');
+	    $this->error('neexistující vizitka');
 	}
 	$this['cardForm']->setDefaults($data->toArray());
 	

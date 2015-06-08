@@ -12,14 +12,14 @@ class CardFormFactory {
     {
 	$f = new Form;
 	
-	$f->addText('name','Jmeno:');//->setRequired();
-	$f->addText('surname','Prijmeni:')->setRequired();
-	$f->addText('institution','Pracoviste:');
+	$f->addText('name','Jméno:');//->setRequired();
+	$f->addText('surname','Příjmení:');//->setRequired();
+	$f->addText('institution','Pracoviště:');
 	$f->addText('project','Projekt:');	
 	$f->AddText('www','web:');
-	$f->addText('date','Datum setkani:')
+	$f->addText('date','Datum setkání:')
 		->setAttribute('type','date');
-	$f->addTextArea('note','Poznamka')
+	$f->addTextArea('note','Poznámka')
 		->setAttribute('rows','10');
 	$f->addMultiUpload('img','Vizitka');
 	$f->addUpload('foto','Foto:');

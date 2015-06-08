@@ -4,24 +4,23 @@ namespace App\Model;
 use Nette\Utils\Image;
 use Tracy\Debugger;
 
-class CardModel {
+class CardModel extends BaseModel{
     
     protected $database;
     private $TableName = 'card';
     private $UploadThumbPath = '/images/cards/thumbs/';
     private $UploadPath = '/images/cards/';
+    private $fotoPath = '/images/photos/';
+    private $fotoName = '';
+    private $fotoExtension = '';
     public $imageName;
     public $date;
     public $extension;
     public $query;
-    
-    public function __construct(\Nette\Database\Context $database) {
-	$this->database = $database;
-    }
-    
+        
     /** vypise vsechny zaznamy z tabulky TableName */
     public function getAll(){
-	return $this->database->table($this->TableName)->order('id DESC');
+	return $this->database->table($this->TableName);//->order('id DESC');
     }
     
     /** ziska id zaznamu v tabulce */
@@ -36,61 +35,70 @@ class CardModel {
     
     /** @TODO rozdelit zpracovani obrazku a insert do dtb **/
     public function insert($values)
-    {	
-	try{
-	    /** zpracovani uploadovane vizitky */
+    {
 	    $cards = $values->img;
-	    foreach($cards as $card)
-	    {
-		if($card->isImage() AND $card->isOk())
+		foreach($cards as $card)
 		{
-		    $extension = pathinfo($card->getSanitizedName(), PATHINFO_EXTENSION);
-		    if(!$values->surname)
+		    if($card->isImage() AND $card->isOk())
 		    {
-			$cardName = pathinfo($card->getSanitizedName(), PATHINFO_FILENAME);
-		    }else{
-			$cardName = $values->surname; 
-		    }		    
-		    $image = $card->toImage();
-		    //$image->resize(700,400, Image::SHRINK_ONLY);
-		    $image->save(WWW_DIR . $this->UploadPath . $cardName.'.'.$extension);  
-		    
-		    $thumb = $card->toImage();
-		    $thumb->resize(700,400, Image::STRETCH);
-		    $thumb->save(WWW_DIR .$this->UploadThumbPath . $cardName.'.'.$extension);
-			    
+			$extension = pathinfo($card->getSanitizedName(), PATHINFO_EXTENSION);
+			if(!$values->surname)
+			{
+			    $cardName = pathinfo($card->getSanitizedName(), PATHINFO_FILENAME);
+			}else{
+			    $cardName = $values->surname; 
+			}		    
+			$image = $card->toImage();
+			//$image->resize(700,400, Image::SHRINK_ONLY);
+			$image->save(WWW_DIR . $this->UploadPath . $cardName.'.'.$extension);  
+
+			$thumb = $card->toImage();
+			$thumb->resize(700,400, Image::STRETCH);
+			$thumb->save(WWW_DIR .$this->UploadThumbPath . $cardName.'.'.$extension);
+
+		    }
+		
+	    
+		    /** zpracovani fotografie osoby */
+		    $foto = $values->foto;
+		    if($foto){		    
+			if($foto->isImage() AND $foto->isOk()){
+			    $fotoExtension = pathinfo($foto->getSanitizedName(), PATHINFO_EXTENSION);
+			    if(!$values->surname)
+			    {
+				$fotoName = pathinfo($foto->getSanitizedName(), PATHINFO_FILENAME);
+			    }else{
+				$fotoName = $values->surname; 
+			    }		    
+			    $image = $foto->toImage();
+			    $image->resize(200,200, Image::SHRINK_ONLY);
+			    $image->save(WWW_DIR . $this->fotoPath . $fotoName.'.'.$fotoExtension);
+
+
+			} 
+		    }
+
+
+		/** zpracovani datumu */
+		if($values->date == Null){
+		    $date = date('Y-m-d');
+		}else{
+		    $date = $values->date;
 		}
-	    /** zpracovani fotografie osoby */
-	    /*$fotos = $values->foto;
-	    foreach($fotos as $foto){
-		if($foto->isImage() AND $foto->isOk()){
-		    
+		/** insert do dtb */
+		$query = $this->database->table($this->TableName)->insert([
+			'name'=> $values->name,
+			'surname'=> $cardName,
+			'institution'=> $values->institution,
+			'project'=>$values->project,
+			'www'=>$values->www,
+			'date'=>$date,
+			'note'=>$values->note,
+			'img'=>$this->UploadPath . $cardName.'.'.$extension,
+			'thumb_img'=> $this->UploadThumbPath . $cardName.'.'.$extension,
+			'foto' => $this->fotoPath . $this->fotoName.'.'.  $this->fotoExtension,
+		    ]);
 		}
-	    }*/
-	
-	    /** zpracovani datumu */
-	    if($values->date == Null){
-		$date = date('Y-m-d');
-	    }else{
-		$date = $values->date;
-	    }
-	    /** insert do dtb */
-	    $query = $this->database->table($this->TableName)->insert([
-		    'name'=> $values->name,
-		    'surname'=> $cardName,
-		    'institution'=> $values->institution,
-		    'project'=>$values->project,
-		    'www'=>$values->www,
-		    'date'=>$date,
-		    'note'=>$values->note,
-		    'img'=>$this->UploadPath . $cardName.'.'.$extension,
-		    'thumb_img'=> $this->UploadThumbPath . $cardName.'.'.$extension,
-		]);
-	
-	    }
-	} catch (Exception $ex) {
-	    $form->addError($ex->getMessage());
-	}
 	/** return aby slo presmerovani pri odeslani primo na ukladanou vizitku */
 	return $query;
     }
