@@ -19,7 +19,6 @@ class CardPresenter extends BasePresenter{
     public function createComponentCardForm()
     {
 	$form = (new CardFormFactory())->create();
-	//$form->onValidate[] = $this->validateForm;
 	$form->onSuccess[] = $this->cardFormSucceeded;
 	return $form;
     }  
@@ -42,9 +41,6 @@ class CardPresenter extends BasePresenter{
 	    $card = $this->database->table('card')->get($cardId);
 	    if(!$values->img){
 		unset( $values->img);
-	    }
-	    if(!$values->foto){
-		unset($values->foto);
 	    }
 	    $card->update($values);
 	    

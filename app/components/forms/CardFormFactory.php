@@ -18,7 +18,7 @@ class CardFormFactory {
 	$f->addText('project','Projekt:');	
 	$f->AddText('www','web:');
 	$f->addText('date','Datum setkání:')
-		->setAttribute('type','date');
+		/*->setAttribute('type','date')*/->setAttribute('placeholder','rrrr-mm-dd');
 	$f->addTextArea('note','Poznámka')
 		->setAttribute('rows','10');
 	$f->addMultiUpload('img','Vizitka');

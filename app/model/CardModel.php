@@ -7,15 +7,13 @@ use Tracy\Debugger;
 class CardModel extends BaseModel{
     
     protected $database;
+    /** nazev tabulky v dtb */ 
     private $TableName = 'card';
     private $UploadThumbPath = '/images/cards/thumbs/';
     private $UploadPath = '/images/cards/';
     private $fotoPath = '/images/photos/';
-    private $fotoName = '';
-    private $fotoExtension = '';
-    public $imageName;
-    public $date;
-    public $extension;
+    public $fotoName = '';
+    public $fotoExtension = '';
     public $query;
         
     /** vypise vsechny zaznamy z tabulky TableName */
@@ -30,7 +28,7 @@ class CardModel extends BaseModel{
     
     /** vyhleda osobu podle prijmeni nebo podle institutu */
     public function search($keywords){
-	return $this->database->query("SELECT * FROM ".$this->TableName." WHERE surname LIKE '%".$keywords."%' OR institution LIKE '%".$keywords."%'");
+	return $this->database->query("SELECT * FROM ".$this->TableName." WHERE surname LIKE '%".$keywords."%' OR name LIKE '%".$keywords."%' OR institution  LIKE '%".$keywords."%'");
     }
     
     /** @TODO rozdelit zpracovani obrazku a insert do dtb **/
@@ -61,7 +59,7 @@ class CardModel extends BaseModel{
 	    
 		    /** zpracovani fotografie osoby */
 		    $foto = $values->foto;
-		    if($foto){		    
+		    
 			if($foto->isImage() AND $foto->isOk()){
 			    $fotoExtension = pathinfo($foto->getSanitizedName(), PATHINFO_EXTENSION);
 			    if(!$values->surname)
@@ -74,9 +72,11 @@ class CardModel extends BaseModel{
 			    $image->resize(200,200, Image::SHRINK_ONLY);
 			    $image->save(WWW_DIR . $this->fotoPath . $fotoName.'.'.$fotoExtension);
 
-
-			} 
-		    }
+			}else{
+			    $fotoName = NULL;
+			    $fotoExtension = NULL;
+			}
+		    
 
 
 		/** zpracovani datumu */
@@ -96,15 +96,11 @@ class CardModel extends BaseModel{
 			'note'=>$values->note,
 			'img'=>$this->UploadPath . $cardName.'.'.$extension,
 			'thumb_img'=> $this->UploadThumbPath . $cardName.'.'.$extension,
-			'foto' => $this->fotoPath . $this->fotoName.'.'.  $this->fotoExtension,
+			'foto' => $this->fotoPath.$fotoName.'.'.$fotoExtension,
 		    ]);
 		}
 	/** return aby slo presmerovani pri odeslani primo na ukladanou vizitku */
 	return $query;
-    }
-    
-    public function update($values){	
-	$this->database->table($this->TableName)->update($values);
     }
     
     public function delete($id){	
