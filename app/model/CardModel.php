@@ -111,8 +111,11 @@ class CardModel extends BaseModel{
 	    unlink(WWW_DIR.$row->thumb_img);
 	    $this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);	    
 	}
-    }   
+    }  
     
+    
+    
+    ####################################################################################################
     /** in progress - rozdeleni funkce insert zatim nefunkcni */
     public function novaVizitka($values){
 	$images = $values->img;
