@@ -30,7 +30,8 @@
 	{ifset $cards}
 	    <div id="card" n:foreach="$cards as $card" class="col-md-4" >
 	<a n:href=":Front:Card:view $card->id">
-	    <img class="img-thumbnail" src="{$basePath}/{$card->thumb_img}" alt="">        
+	    <img class="img-thumbnail" src="{$basePath}/{$card->thumb_img}" alt="">   
+	    
 	    <h3>{$card->name} {$card->surname}</h3>
 	</a>
 	<h4>{$card->institution}</h4>

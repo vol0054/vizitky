@@ -18,7 +18,7 @@ class CardModel extends BaseModel{
         
     /** vypise vsechny zaznamy z tabulky TableName */
     public function getAll(){
-	return $this->database->table($this->TableName);//->order('id DESC');
+	return $this->database->table($this->TableName)->order('id DESC');
     }
     
     /** ziska id zaznamu v tabulce */
@@ -40,18 +40,18 @@ class CardModel extends BaseModel{
 		    if($card->isImage() AND $card->isOk())
 		    {
 			$extension = pathinfo($card->getSanitizedName(), PATHINFO_EXTENSION);
-			if(!$values->surname)
+			if($values->surname)
 			{
-			    $cardName = pathinfo($card->getSanitizedName(), PATHINFO_FILENAME);
+			   $cardName = $values->surname;  
 			}else{
-			    $cardName = $values->surname; 
+			    $cardName = pathinfo($card->getSanitizedName(), PATHINFO_FILENAME);
 			}		    
 			$image = $card->toImage();
 			//$image->resize(700,400, Image::SHRINK_ONLY);
 			$image->save(WWW_DIR . $this->UploadPath . $cardName.'.'.$extension);  
 
 			$thumb = $card->toImage();
-			$thumb->resize(700,400, Image::STRETCH);
+			$thumb->resize(700,400, Image::EXACT);
 			$thumb->save(WWW_DIR .$this->UploadThumbPath . $cardName.'.'.$extension);
 
 		    }
@@ -69,7 +69,7 @@ class CardModel extends BaseModel{
 				$fotoName = $values->surname; 
 			    }		    
 			    $image = $foto->toImage();
-			    $image->resize(200,200, Image::SHRINK_ONLY);
+			    $image->resize(200,200, Image::EXACT);
 			    $image->save(WWW_DIR . $this->fotoPath . $fotoName.'.'.$fotoExtension);
 
 			}else{
