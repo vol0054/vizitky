@@ -1,6 +1,6 @@
 /bower_components/
 /bin/
-/nbproject/
+/nbproject/*
 
 # Compiled source #
 ###################
