@@ -10,16 +10,17 @@ class HomepagePresenter extends BasePresenter{
     
     public $cards;
     
-    public function renderDefault(){
-	$list = $this->Card->getAll();
-	$listCount = $list->count();
-	/** @var NasExt\Controls\VisualPaginator $vp */
-	$vp = $this['vp'];
-	$paginator = $vp->getPaginator();
-	$paginator->itemsPerPage = 9;
-	$paginator->itemCount = $listCount;
-	$cards = $list->limit($paginator->itemsPerPage, $paginator->offset);
-	$this->template->cards = $cards;
+    public function renderDefault()
+	{
+		$list = $this->Card->getAll();
+		$listCount = $list->count();
+		/** @var NasExt\Controls\VisualPaginator $vp */
+		$vp = $this['vp'];
+		$paginator = $vp->getPaginator();
+		$paginator->itemsPerPage = 9;
+		$paginator->itemCount = $listCount;
+		$cards = $list->limit($paginator->itemsPerPage, $paginator->offset);
+		$this->template->cards = $cards;
 	
     }
     

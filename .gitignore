@@ -1,8 +1,5 @@
-/temp/
 /bower_components/
 /bin/
-/app/config/config.neon
-/app/config/config.local.neon
 /nbproject/
 
 # Compiled source #

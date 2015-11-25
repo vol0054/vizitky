@@ -1,14 +1,16 @@
-    <?php
+<?php
 
 namespace App\FrontModule\Presenters;
+
 use App\components\forms\CardFormFactory;
 use Tracy\Debugger;
+
 class CardPresenter extends BasePresenter{   
     
     public function renderView($id)
     {
-	$card= $this->Card->getId($id);
-	$this->template->card = $card;
+		$card= $this->Card->getId($id);
+		$this->template->card = $card;
     }
     
     public function renderNew()

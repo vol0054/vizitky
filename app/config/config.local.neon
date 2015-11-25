@@ -1,0 +1,10 @@
+
+parameters:
+
+
+database:
+	dsn: 'mysql:host=localhost;dbname=bCard'
+	user: root
+	password:
+	options:
+		lazy: yes
