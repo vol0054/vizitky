@@ -1236,60 +1236,6 @@
         "description": "Customization for the best database management tool written in PHP, Adminer"
     },
     {
-        "name": "nasext/visual-paginator",
-        "version": "v2.2",
-        "version_normalized": "2.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/NasExt/VisualPaginator.git",
-            "reference": "a71c49ba68f05ce332fcb208f3b9ddcd3951c38f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/NasExt/VisualPaginator/zipball/a71c49ba68f05ce332fcb208f3b9ddcd3951c38f",
-            "reference": "a71c49ba68f05ce332fcb208f3b9ddcd3951c38f",
-            "shasum": ""
-        },
-        "require": {
-            "nette/nette": "@dev",
-            "php": ">=5.3.0"
-        },
-        "time": "2014-03-20 00:31:28",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "NasExt\\Controls\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "David Grudl",
-                "email": "david@grudl.com",
-                "homepage": "http://davidgrudl.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Jan Dolecek",
-                "email": "juzna.cz@gmail.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Dusan Hudak"
-            }
-        ],
-        "description": "VisualPaginator for Nette Framework",
-        "keywords": [
-            "VisualPaginator",
-            "nasext",
-            "nette"
-        ]
-    },
-    {
         "name": "nette/tester",
         "version": "v1.6.1",
         "version_normalized": "1.6.1.0",
@@ -1345,6 +1291,60 @@
             "nette",
             "testing",
             "unit"
+        ]
+    },
+    {
+        "name": "nasext/visual-paginator",
+        "version": "v2.2",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/NasExt/VisualPaginator.git",
+            "reference": "a71c49ba68f05ce332fcb208f3b9ddcd3951c38f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/NasExt/VisualPaginator/zipball/a71c49ba68f05ce332fcb208f3b9ddcd3951c38f",
+            "reference": "a71c49ba68f05ce332fcb208f3b9ddcd3951c38f",
+            "shasum": ""
+        },
+        "require": {
+            "nette/nette": "@dev",
+            "php": ">=5.3.0"
+        },
+        "time": "2014-03-20 00:31:28",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "NasExt\\Controls\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "David Grudl",
+                "email": "david@grudl.com",
+                "homepage": "http://davidgrudl.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Jan Dolecek",
+                "email": "juzna.cz@gmail.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Dusan Hudak"
+            }
+        ],
+        "description": "VisualPaginator for Nette Framework",
+        "keywords": [
+            "VisualPaginator",
+            "nasext",
+            "nette"
         ]
     }
 ]

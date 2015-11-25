@@ -17,16 +17,16 @@ class BasePresenter extends \App\Presenters\BasePresenter{
     protected $database;
     
     public function __construct(Nette\Database\Context $database) {
-	parent::__construct();
-	$this->database = $database;
+		parent::__construct();
+		$this->database = $database;
     }
    
     public function createComponentNavigation(){
-	return new components\navigation\NavigationControl;
+		return new components\navigation\NavigationControl;
     } 
    
     public function createComponentFooter(){
-	return new components\footer\FooterControl;
+		return new components\footer\FooterControl;
     }
     
     

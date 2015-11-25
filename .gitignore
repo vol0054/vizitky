@@ -39,3 +39,7 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+/temp/cache/Nette.Configurator/
+/temp/cache/latte/
+/temp/cache/_Nette.Database.5cbe72ea81a05e1463b1c016970b04ef/
+/temp/cache/_Nette.RobotLoader/

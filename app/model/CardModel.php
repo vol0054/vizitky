@@ -18,17 +18,17 @@ class CardModel extends BaseModel{
         
     /** vypise vsechny zaznamy z tabulky TableName */
     public function getAll(){
-	return $this->database->table($this->TableName)->order('id DESC');
+		return $this->database->table($this->TableName)->order('id DESC');
     }
     
     /** ziska id zaznamu v tabulce */
     public function getId($id){
-	return $this->database->table($this->TableName)->get($id);
+		return $this->database->table($this->TableName)->get($id);
     }
     
     /** vyhleda osobu podle prijmeni nebo podle institutu */
     public function search($keywords){
-	return $this->database->query("SELECT * FROM ".$this->TableName." WHERE surname LIKE '%".$keywords."%' OR name LIKE '%".$keywords."%' OR institution  LIKE '%".$keywords."%'");
+		return $this->database->query("SELECT * FROM ".$this->TableName." WHERE surname LIKE '%".$keywords."%' OR name LIKE '%".$keywords."%' OR institution  LIKE '%".$keywords."%'");
     }
     
     /** @TODO rozdelit zpracovani obrazku a insert do dtb **/
@@ -99,18 +99,18 @@ class CardModel extends BaseModel{
 			'foto' => $this->fotoPath.$fotoName.'.'.$fotoExtension,
 		    ]);
 		}
-	/** return aby slo presmerovani pri odeslani primo na ukladanou vizitku */
-	return $query;
+		/** return aby slo presmerovani pri odeslani primo na ukladanou vizitku */
+		return $query;
     }
     
     public function delete($id){	
-	$row = $this->getId($id);
-	//$this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);
-	if($row){
-	    unlink(WWW_DIR. $row->img);
-	    unlink(WWW_DIR.$row->thumb_img);
-	    $this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);	    
-	}
+		$row = $this->getId($id);
+		//$this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);
+		if($row){
+			unlink(WWW_DIR. $row->img);
+			unlink(WWW_DIR.$row->thumb_img);
+			$this->database->query('DELETE FROM '.$this->TableName.' WHERE id= '.$id);	    
+		}
     }  
     
     
@@ -118,18 +118,19 @@ class CardModel extends BaseModel{
     ####################################################################################################
     /** in progress - rozdeleni funkce insert zatim nefunkcni */
     public function novaVizitka($values){
-	$images = $values->img;
-	try{
-	    $this->uprav($images, $values);
-	    $this->ulozDoDB($values);
-	} catch (Exception $ex) {
+		$images = $values->img;
+		try{
+			$this->uprav($images, $values);
+			$this->ulozDoDB($values);
+		} catch (Exception $ex) {
 
-	}
-	return $this->query;
+		}
+		return $this->query;
     }
     
     /** upravi a presune vizitku nebo foto do slozky / */
-    private function uprav($images,$values){
+    private function uprav($images,$values)
+	{
 	    foreach($images as $image){
 		if($image->isImage() AND $image->isOk())
 		{

@@ -26,7 +26,7 @@ class HomepagePresenter extends BasePresenter{
     
     public function createComponentVp()
     {
-	return new \NasExt\Controls\VisualPaginator();
+	return new NasExt\Controls\VisualPaginator();
     }
    
     public function createComponentSearchForm()
